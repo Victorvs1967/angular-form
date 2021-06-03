@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PassDataService } from 'src/app/service/pass-data.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   submitStatus: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router ) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private passDataService: PassDataService) {
     this.submitStatus = false;
   }
 

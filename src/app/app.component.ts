@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PassDataService } from './service/pass-data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  onLogin: boolean;
+  public onLogin: boolean = false;
 
-  constructor(private router: Router) {
-    this.onLogin = false;
+  constructor(private router: Router, private passDataService: PassDataService) {
+    this.passDataService.passDataEvent.subscribe((data: boolean) => this.onLogin = data);
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class AppComponent {
   }
 
   clickLogin() {
-    this.onLogin = true;
+    this.router.navigateByUrl('');
   }
 
 }

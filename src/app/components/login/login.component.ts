@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PassDataService } from 'src/app/service/pass-data.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  onRegister: boolean;
+  public onLogin: boolean;
+  public onRegister: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private passDataService: PassDataService) {
     this.onRegister = false;
+    this.onLogin = true;
   }
 
   ngOnInit(): void {
+    this.loginForm.reset();
   }
 
   loginForm: FormGroup = this.formBuilder.group({
@@ -26,13 +30,13 @@ export class LoginComponent implements OnInit {
   clickLogin() {
     console.log(this.loginForm.controls.username.value);
     console.log(this.loginForm.controls.password.value);
+    this.loginForm.controls.username.setValue('');
+    this.loginForm.controls.password.setValue('');
 
-    this.onRegister = true;
+    this.passDataService.passDataEvent.emit(this.onLogin);
   }
 
-
   clickRegister() {
-    this.onRegister = true;
     this.router.navigateByUrl('register');
   }
 
