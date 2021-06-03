@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-form';
+
+  onLogin: boolean;
+
+  constructor(private router: Router) {
+    this.onLogin = false;
+  }
+
+  ngOnInit() {
+  }
+
+  clickLogout() {
+    this.onLogin = false;
+    this.router.navigateByUrl('login');
+  }
+
+  clickLogin() {
+    this.onLogin = true;
+  }
+
 }
